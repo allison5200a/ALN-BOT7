@@ -42,7 +42,6 @@ const nsfw = JSON.parse(fs.readFileSync('./database/json/nsfw.json'))
 const _limit = JSON.parse(fs.readFileSync('./database/json/limit.json'))
 const samih = JSON.parse(fs.readFileSync('./database/json/simi.json'))
 const user = JSON.parse(fs.readFileSync('./database/json/user.json'))
-const publik = JSON.parse(fs.readFileSync('./database/json/public.json'))
 const bucinrandom = JSON.parse(fs.readFileSync('./database/json/bucin.json'))
 const hekerbucin = JSON.parse(fs.readFileSync('./database/json/hekerbucin.json'))
 const katailham = JSON.parse(fs.readFileSync('./database/json/katailham.json'))
@@ -196,7 +195,6 @@ async function starts() {
 					userB: `Olá ${pushname2}, Você não está registrado no banco de dados, digite: \n${prefix}daftar`,
 					admin: '*sɪʟᴇɴᴄɪᴏ ᴍᴇᴍʙʀᴏ ᴄᴏᴍᴜᴍ, ᴠᴏᴄᴇ̂ ɴᴀ̃ᴏ ᴛᴇᴍ ᴍᴏʀᴀʟ ᴘᴀʀᴀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅo!*',
 					Badmin: '*ᴅᴇsᴄᴜʟᴘᴇ, ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ sᴏ́ ᴘᴏᴅᴇ sᴇʀ ᴜsᴀᴅᴏ ǫᴜᴀɴᴅᴏ ʙᴏᴛs sᴇ ᴛᴏʀɴᴀᴍ ᴀᴅᴍɪɴ!*',
-					publikG: `*ʙᴏᴛ ᴀɢᴏʀᴀ ᴇ́ ᴘʀɪᴠᴀᴅᴏ ᴅᴏ ᴘʀᴏᴘʀɪᴇ́ᴛᴀʀɪᴏ ᴘᴀʀᴀ ᴍᴀɪs ᴅᴇᴛᴀʟʜᴇs, ᴅɪɢɪᴛᴇ*\n*${prefix}infobot*`
 				}
 			}
 
@@ -217,7 +215,6 @@ async function starts() {
 			const isNsfw = isGroup ? nsfw.includes(from) : false
 			const isAnime = isGroup ? anime.includes(from) : false
 			const isSimi = isGroup ? samih.includes(from) : false 
-			const isPublic = isGroup ? publik.includes(from) : false 
 			const isAntiLink = isGroup ? antilink.includes(from) : false
 			const isOwner = ownerNumber.includes(sender)
 			const isUser = user.includes(sender)
@@ -332,7 +329,6 @@ async function starts() {
 			case 'ep':
 				if (isBanned) return reply(mess.only.benned)
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				if (args.length < 1) return reply('Pilih themenya gan, 1 - 162\n\nContoh Penggunaan: !tp/1/Farhan')
 				textpro = body.slice(4)
@@ -345,7 +341,6 @@ async function starts() {
 				case 'tp':
 				if (isBanned) return reply(mess.only.benned)
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				if (args.length < 1) return reply('Pilih themenya gan, 1 - 162\n\nContoh Penggunaan: !tp/1/Farhan')
 				textpro = body.slice(4)
@@ -357,7 +352,6 @@ async function starts() {
 					break
 			case 'brainly':
 					if (!isUser) return reply(mess.only.userB)
-					if (!isPublic) return reply(mess.only.publikG)
 					if (isBanned) return reply(mess.only.benned)
 					if (isLimit(sender)) return reply(limitend(pushname2))
                     brien = body.slice(9)
@@ -389,7 +383,6 @@ async function starts() {
 			case 'help':
 			case 'menu':
 			if (isBanned) return reply(mess.only.benned)
-			if (!isPublic) return reply(mess.only.publikG)
 				if (!isUser) return reply(mess.only.userB)
 				uptime = process.uptime()
 				user.push(sender)
@@ -410,7 +403,6 @@ async function starts() {
     				break
     			case 'profile':
     				frhan.updatePresence(from, Presence.composing)
-    				if (!isPublic) return reply(mess.only.publikG)
 					if (!isUser) return reply(mess.only.userB)
 					if (isBanned) return reply(mess.only.benned)
     				try {
@@ -426,7 +418,6 @@ async function starts() {
 				case 'bahasa':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 				frhan.sendMessage(from, bahasa(prefix), text, {quoted: mek})
 				break 
 				case 'donasi':
@@ -443,7 +434,6 @@ async function starts() {
 					break 
 				case 'totaluser':
 					frhan.updatePresence(from, Presence.composing) 
-					if (!isPublic) return reply(mess.only.publikG)
 					if (!isUser) return reply(mess.only.userB)
 					if (!isOwner) return reply(mess.only.ownerB)    
 					teks = `╭────「 *TOTAL USER ${name}* 」\n`
@@ -473,7 +463,6 @@ async function starts() {
 					break
 				case 'premiumlist':
 					frhan.updatePresence(from, Presence.composing) 
-					if (!isPublic) return reply(mess.only.publikG)
 					if (!isUser) return reply(mess.only.userB)
 					teks = `╭─「 *TOTAL USER PREMIUM ${name}* 」\n`
 					no = 0
@@ -522,7 +511,6 @@ async function starts() {
 				case 'unblock':
                     if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 					if (!isGroup) return reply(mess.only.group)
 					if (!isOwner) return reply(mess.only.ownerB)
 				    frhan.blockUser (`${body.slice(9)}@c.us`, "remove")
@@ -664,7 +652,6 @@ async function starts() {
 					break 
 					case 'trigger':
 					if (!isUser) return reply(mess.only.userB)
-					if (!isPublic) return reply(mess.only.publikG)
 					if (isBanned) return reply (mess.only.benned)
 					if (isLimit(sender)) return reply(limits.limitend(pushname2))
 					var imgbb = require('imgbb-uploader')
@@ -692,7 +679,6 @@ async function starts() {
 
 				case 'img2url':
 			if (!isUser) return reply(mess.only.userB)
-			if (!isPublic) return reply(mess.only.publikG)
 			if (isBanned) return reply(mess.only.benned)
 			if (isLimit(sender)) return reply(limitend(pushname2))
 					reply(mess.wait)
@@ -714,7 +700,6 @@ async function starts() {
                  case 'kalkulator':
 					if (isBanned) return reply(mess.only.benned)    
 				   if (!isUser) return reply(mess.only.userB)
-				   if (!isPublic) return reply(mess.only.publikG)
 				   if (isLimit(sender)) return reply(limitend(pushname2))
 				     if (args.length < 1) return reply(`[❗] Kirim perintah *${prefix}kalkulator [ Angka ]*\nContoh : ${prefix}kalkulator 12*12\n*NOTE* :\n- Untuk Perkalian Menggunakan *\n- Untuk Pertambahan Menggunakan +\n- Untuk Pengurangan Mennggunakan -\n- Untuk Pembagian Menggunakan /`)
 				    mtk = `${body.slice(12)}`
@@ -729,7 +714,6 @@ async function starts() {
                 case 'fitnah':
                  if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-                 if (!isPublic) return reply(mess.only.publikG)
 				if (args.length < 1) return reply(`Usage :\n${prefix}fitnah [@tag/pesan/balasanbot]]\n\nEx : \n${prefix}fitnah @tagmember/hai/hai juga`)
 				var gh = body.slice(8)
 				mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
@@ -744,7 +728,6 @@ async function starts() {
 				case 'infogrup':
 				case 'grupinfo':
 				if (isBanned) return reply(mess.only.benned)  
-				 if (!isPublic) return reply(mess.only.publikG)
 				if (!isUser) return reply(mess.only.userB)
                 frhan.updatePresence(from, Presence.composing)
                 if (!isGroup) return reply(mess.only.group)
@@ -760,7 +743,6 @@ async function starts() {
 				case 'trendtwit':
 					frhan.updatePresence(from, Presence.composing) 
                      if (!isUser) return reply(mess.only.userB)
-                     if (!isPublic) return reply(mess.only.publikG)
                      if (isLimit(sender)) return reply(limitend(pushname2))
 					data = await fetchJson(`https://docs-jojo.herokuapp.com/api/trendingtwitter`, {method: 'get'})
 					reply(mess.wait)
@@ -787,7 +769,6 @@ async function starts() {
 					rano = getRandom('.webp')
 					anu = await fetchJson(`https://tobz-api.herokuapp.com/api/cry?apikey=${TobzApi}`, {method: 'get'})
                    if (!isUser) return reply(mess.only.userB)
-                   if (!isPublic) return reply(mess.only.publikG)
                    if (isLimit(sender)) return reply(limitend(pushname2))
                    if (isBanned) return reply(mess.only.benned)
                    if (!isGroup) return reply(mess.only.group)
@@ -804,7 +785,6 @@ async function starts() {
 					frhan.updatePresence(from, Presence.composing) 
 					data = await fetchJson(`https://api.vhtear.com/neonime_search?query=${body.slice(9)}&apikey=${VthearApi}`, {method: 'get'})
                     if (!isUser) return reply(mess.only.userB)
-                    if (!isPublic) return reply(mess.only.publikG)
                     if (isLimit(sender)) return reply(limitend(pushname2))
                     if (isBanned) return reply(mess.only.benned)
                     if (!isGroup) return reply(mess.only.group)
@@ -821,7 +801,6 @@ async function starts() {
 					rano = getRandom('.webp')
 					anu = await fetchJson(`https://tobz-api.herokuapp.com/api/hug?apikey=${TobzApi}`, {method: 'get'})
                    if (!isUser) return reply(mess.only.userB)
-                   if (!isPublic) return reply(mess.only.publikG)
                    if (isLimit(sender)) return reply(limitend(pushname2))
                    if (isBanned) return reply(mess.only.benned)
                    if (!isGroup) return reply(mess.only.group)
@@ -841,7 +820,6 @@ async function starts() {
 				case 'grouplink':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 				    if (!isGroup) return reply(mess.only.group)
 				    if (!isBotGroupAdmins) return reply(mess.only.Badmin)
 				    linkgc = await frhan.groupInviteCode (from)
@@ -851,7 +829,6 @@ async function starts() {
 				case 'hidetag':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 					if (!isGroup) return reply(mess.only.group)
 					if (!isBotGroupAdmins) return reply(mess.only.Badmin)
 					var value = body.slice(9)
@@ -872,7 +849,6 @@ async function starts() {
 				case 'cekganteng':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 					ganteng = body.slice(12)
 					const gan =['10%','30%','20%','40%','50%','60%','70%','62%','74%','83%','97%','100%','29%','94%','75%','82%','41%','39%']
 					const teng = gan[Math.floor(Math.random() * gan.length)]
@@ -882,7 +858,6 @@ async function starts() {
 				case 'cekcantik':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 					cantik = body.slice(11)
 					if (args.length < 1) return reply('Yg Mau dicek Siapa Kak??')
 					const can =['10% banyak" perawatan ya kak:v\nCanda Perawatan:v','30% Semangat Kaka Merawat Dirinya><','20% Semangat Ya Kaka👍','40% Wahh Kaka><','50% kaka cantik deh><','60% Hai Cantik🐊','70% Hai Ukhty🐊','62% Kakak Cantik><','74% Kakak ni cantik deh><','83% Love You Kakak><','97% Assalamualaikum Ukhty🐊','100% Kakak Pake Susuk ya??:v','29% Semangat Kakak:)','94% Hai Cantik><','75% Hai Kakak Cantik','82% wihh Kakak Pasti Sering Perawatan kan??','41% Semangat:)','39% Lebih Semangat🐊']
@@ -906,7 +881,6 @@ async function starts() {
 				case 'setname':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
                 if (!isGroup) return reply(mess.only.group)
 			    if (!isGroupAdmins) return reply(mess.only.admin)
 				if (!isBotGroupAdmins) return reply(mess.only.Badmin)
@@ -916,7 +890,6 @@ async function starts() {
                 case 'setdesc':
                 if (isBanned) return reply(mess.only.benned)    
                 if (!isUser) return reply(mess.only.userB)
-                if (!isPublic) return reply(mess.only.publikG)
                 if (!isGroup) return reply(mess.only.group)
 			    if (!isGroupAdmins) return reply(mess.only.admin)
 				if (!isBotGroupAdmins) return reply(mess.only.Badmin)
@@ -926,7 +899,6 @@ async function starts() {
 				case 'tts':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 				if (isLimit(sender)) return reply(limitend(pushname2))
 					if (args.length < 1) return frhan.sendMessage(from, 'Kode bahasanya mana gan?\n Kalo Gatau Kode Bahasanya Apa Aja Ketik Saja *${prefix}bahasa*', text, {quoted: mek})
 					const gtts = require('./lib/gtts')(args[0])
@@ -952,7 +924,6 @@ async function starts() {
 				case 'translete':
 				if (isBanned) return reply(mess.only.benned)
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				    if (args.length < 1) return frhan.sendMessage(from, 'Kode Bahasanya???', text, {quoted: mek})
 				    if (args.length < 2) return frhan.sendMessage(from, 'Text Yg Mau Di translate??', text, {quoted: mek})
@@ -968,7 +939,6 @@ async function starts() {
 				case 'ts':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				    if (args.length < 1) return frhan.sendMessage(from, 'Kode Bahasanya???', text, {quoted: mek})
 				    if (args.length < 2) return frhan.sendMessage(from, 'Text Yg Mau Di translate??', text, {quoted: mek})
@@ -984,7 +954,6 @@ async function starts() {
 	            case 'setpp':
 	            if (isBanned) return reply(mess.only.benned)    
 	            if (!isUser) return reply(mess.only.userB)
-	            if (!isPublic) return reply(mess.only.publikG)
                     if (!isGroup) return reply(mess.only.group)
                     if (!isGroupAdmins) return reply(mess.only.admin)
                     if (!isBotGroupAdmins) return reply(mess.only.Badmin)
@@ -996,7 +965,6 @@ async function starts() {
                 case 'apakah':
                 if (isBanned) return reply(mess.only.benned)    
                 if (!isUser) return reply(mess.only.userB)
-                if (!isPublic) return reply(mess.only.publikG)
 					apakah = body.slice(1)
 					const apakahh = ["Ya","Tidak","Ga tau"]
 					const kah = apakahh[Math.floor(Math.random() * apakahh.length)]
@@ -1005,7 +973,6 @@ async function starts() {
 				case 'rate':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 					rate = body.slice(1)
 					ratee = ["100%","95%","90%","85%","80%","75%","70%","65%","60%","55%","50%","45%","40%","35%","30%","25%","20%","15%","10%","5%"]
 					const te = ratee[Math.floor(Math.random() * ratee.length)]
@@ -1014,7 +981,6 @@ async function starts() {
 				case 'watak':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 					watak = body.slice(1)
 					wa =["penyayang","pemurah","Pemarah","Pemaaf","Penurut","Baik","baperan","Baik Hati","penyabar","Uwu","top deh, pokoknya","Suka Membantu"]
 					const tak = wa[Math.floor(Math.random() * wa.length)]
@@ -1023,7 +989,6 @@ async function starts() {
 				case 'hobby':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 					hobby = body.slice(1)
 					hob =["Memasak","Membantu Atok","Mabar","Nobar","Sosmed an","Membantu Orang lain","Nonton Anime","Nonton Drakor","Naik Motor","Nyanyi","Menari","Bertumbuk","Menggambar","Foto fotoan Ga jelas","Maen Game","Berbicara Sendiri"]
 					const by = hob[Math.floor(Math.random() * hob.length)]
@@ -1032,7 +997,6 @@ async function starts() {
 				case 'bisakah':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 					bisakah = body.slice(1)
 					const bisakahh = ["Bisa","Tidak Bisa","Ga tau"]
 					const keh = bisakahh[Math.floor(Math.random() * bisakahh.length)]
@@ -1041,7 +1005,6 @@ async function starts() {
 				case 'kapankah':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 					kapankah = body.slice(1)
 					const kapankahh = ["1 Minggu lagi","1 Bulan lagi","1 Tahun lagi","100 tahun lagi","gatau","2030","1 Jam lagi","1 Menit lagi"]
 					const koh = kapankahh[Math.floor(Math.random() * kapankahh.length)]
@@ -1050,7 +1013,6 @@ async function starts() {
 				case 'truth':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 				if (isLimit(sender)) return reply(limitend(pushname2))
 					anu = await fetchJson(`https://xptnbotapinew.herokuapp.com/?truth&apikey=xptn`, {method: 'get'})
 					ttrth = `${anu.Dare}`
@@ -1061,7 +1023,6 @@ async function starts() {
 				case 'dare':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPublic) return reply(mess.only.publikG)
 				if (isLimit(sender)) return reply(limitend(pushname2))
 					anu = await fetchJson(`https://xptnbotapinew.herokuapp.com/?dare&apikey=xptn`, {method: 'get'})
 					der = `${anu.Dare}`
@@ -1077,7 +1038,6 @@ async function starts() {
                     break
                 case 'tagme':
                 if (isBanned) return reply(mess.only.benned)
-                if (!isPublic) return reply(mess.only.publikG)
                 if (!isUser) return reply(mess.only.userB)
 					var nom = mek.participant
 					const tag = {
@@ -1089,7 +1049,6 @@ async function starts() {
          case 'lirik':
                 if (isBanned) return reply(mess.only.benned)    
                 if (!isUser) return reply(mess.only.userB)
-                if (!isPublic) return reply(mess.only.publikG)
                 if (isLimit(sender)) return reply(limitend(pushname2))
                 reply(mess.wait)
 					teks = body.slice(7)
@@ -1101,7 +1060,6 @@ async function starts() {
                 case 'report':
                 if (isBanned) return reply(mess.only.benned)    
                 if (!isUser) return reply(mess.only.userB)
-                if (!isPublic) return reply(mess.only.publikG)
                      const pesan = body.slice(8)
                       if (pesan.length > 300) return frhan.sendMessage(from, 'Maaf Teks Terlalu Panjang, Maksimal 300 Teks', text, {quoted: mek})
                         var nomor = mek.participant
